@@ -13,7 +13,9 @@ import numpy as np
 import re
 import os
 import time
+import ssl
 
+ssl._create_default_https_context = ssl._create_unverified_context
 path = os.path.dirname(os.path.realpath(__file__))
 OUTPUTPATH = path + "\\times.csv"
 
@@ -48,16 +50,19 @@ for link in links[-1:]:
     df = tables[3]
     
     # Obtain the swimmers best events
+    # Consider long course only for olynpic prediction
     df = df[df["Course"]=="50m"]
     df = df[df["Pts."]!="-"]
     df["Pts."] = df["Pts."].apply(pd.to_numeric)
+    # Define elite performance of more than 900 FINA points, this 
     best_performances = df[df["Pts."]>900]
     best_events = best_performances["Event"].values
     
     for events in best_events:
         if events in ["50m Backstroke", "50m Breaststroke", "50m Butterfly"]:
             continue
-        event_history_page = address + "&styleId=" + str(1.ID)
+        event_ID = event_df['ID'][events]
+        event_history_page = address + "&styleId=" + str(event_ID)
         print(event_history_page)
         
         historic_tables = pd.read_html(event_history_page)
@@ -120,11 +125,12 @@ for event in event_df["ID"]:
         
         time.sleep(5)
 
-times_df.to_csv(OUTPUTPATH) 
+#times_df.to_csv(OUTPUTPATH) 
     
 #%%
 def get_swimmer_info(url):
-
+    
+    # Initiate web scraper
     page = urlopen(url)
     html = page.read().decode("utf-8")
     soup = BeautifulSoup(html, "html.parser")
