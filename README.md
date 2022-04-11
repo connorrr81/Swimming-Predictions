@@ -14,12 +14,22 @@ So far we've managed to extract the time (mm:ss), date, location and event for a
 - month: from date feature
 - year: from date feature
 - PB_at_swim: the swimmer's personal best at the time of swim.
-- competition_flag: character indicating the type of competition the historical swim was swam at, O = Oympics, W = World Championships, N = Other.
+- competition_flag: character indicating the type of competition the historical swim was swam at, O = Olympics, W = World Championships, N = Other.
 - finals_flag: character indicating whether or not the swim was a heat or final swim, as swimmers tend to save themselves in heats. Identified by looking at swims in the same event, location and week.
 - time_change_since_covid: difference between average time before the pandemic (2019-20) and after (2020-).
 
 
 ### Models
+#### Multiple Linear Regression
+First tried out a linear model with time as the dependent variable and all predicotrs mentioned above (to start with). There were around 8000 observations with 12 predictors so did not bother with regularisation techniques such as LASSO or Ridge regression. After fitting the full model, I undertook a manual process of eliminating variables using t-tests on the predicted coefficients and implemented a Likelihood ratio test to determine if the reduced model performs as well as the larger. Once satisfied with my model I check the assumptions for linear regression: 
+
+#### SVM
+
+#### Random Forest
+
+#### XGBoost
+
 
 
 ## Visualisation
+Aiming to build an Rshiny app showing the predicted swims against true swims for each model, alonside the rmspe.
