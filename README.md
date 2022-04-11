@@ -6,8 +6,20 @@ The data was obtained from swimrankings (https://www.swimrankings.net/index.php?
 
 ## Methodology
 ### Web scraping
+Swimrankings have a webpage containing a list of the top 100 male and female athletes, selected by their best alltime result according to the FINA points table. This list would contain the majority of the swimmers who made an Olympic final in Tokyo. On the webpage one can click onto the athlete's profile and see their current personal bests and personal stats (i.e. DOB and Nation), I used BeautifulSoup to find these links and navigate through the website. To limit the amount of unneccessary data in our analysis, I found the events where that particular athlete's PB has greater than 900 FINA points (1000 = WR), these are likely the event that swimmer swims at the games. Clicking on the event name on this page takes you to a table of historical swims for that swimmer and event, Bingo. The web scraper pulls together these tables for the top 100 swimmers (as of 2021). Now on to the fun bit....  
+
 ### Feature Engineering
+So far we've managed to extract the time (mm:ss), date, location and event for all the recorded swims, up to and including the Olympics, for our top 100 swimmers. Along with the swimmer's nation, club and DOB. To keep our regressors happy with a numerical dependent variable, the swim time was converted to seconds. The following features were created with the hope of increasing model efficacy:
+- age_at_swim: the age of the swimmer, days, at the time of swim.
+- month: from date feature
+- year: from date feature
+- PB_at_swim: the swimmer's personal best at the time of swim.
+- competition_flag: character indicating the type of competition the historical swim was swam at, O = Oympics, W = World Championships, N = Other.
+- finals_flag: character indicating whether or not the swim was a heat or final swim, as swimmers tend to save themselves in heats. Identified by looking at swims in the same event, location and week.
+- time_change_since_covid: difference between average time before the pandemic (2019-20) and after (2020-).
+
+
 ### Models
-### Model selection
+
 
 ## Visualisation
