@@ -21,7 +21,12 @@ So far we've managed to extract the time (mm:ss), date, location and event for a
 
 ### Models
 #### Multiple Linear Regression
-First tried out a linear model with time as the dependent variable and all predicotrs mentioned above (to start with). There were around 8000 observations with 12 predictors so did not bother with regularisation techniques such as LASSO or Ridge regression. After fitting the full model, I undertook a manual process of eliminating variables using t-tests on the predicted coefficients and implemented a Likelihood ratio test to determine if the reduced model performs as well as the larger. Once satisfied with my model I check the assumptions for linear regression: 
+First tried out a linear model with time as the dependent variable and all predicotrs mentioned above (to start with). There were around 8000 observations with 12 predictors so did not bother with regularisation techniques such as LASSO or Ridge regression. After fitting the full model, I undertook a manual process of eliminating variables using t-tests on the predicted coefficients and implemented a Likelihood ratio test to determine if the reduced model performs as well as the larger. Once satisfied with my model I ensure the assumptions for linear regression are met:
+- There is a linear relationship between the independent variables and the dependent variable.
+- The error terms of the model are normally distributed.
+- The predictors used in the regression are not correlated with each other.
+- No Autocorrelations in the residuals
+- Error terms are homoscedastic
 
 #### SVM
 
@@ -32,4 +37,4 @@ First tried out a linear model with time as the dependent variable and all predi
 
 
 ## Visualisation
-Aiming to build an Rshiny app showing the predicted swims against true swims for each model, alonside the rmspe.
+Aiming to build an Rshiny app showing the predicted swims against true swims for each model, alongside the test rmspe.
