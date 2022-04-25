@@ -15,7 +15,6 @@ import scipy.stats
 from datetime import timedelta
 from sklearn.preprocessing import LabelEncoder,OneHotEncoder
 from sklearn.linear_model import LinearRegression
-from sklearn.metrics import mean_squared_error
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.impute import SimpleImputer
 from statsmodels.api import OLS
@@ -36,7 +35,6 @@ df["Time (s) change since COVID"] = imp.fit_transform(df[["Time (s) change since
 
 
 #%% Encode 
-onehot=True
     
 def encode_data(df, onehot, categorical_cols):
     if onehot:
@@ -44,13 +42,8 @@ def encode_data(df, onehot, categorical_cols):
         return pd.get_dummies(df, columns=categorical_cols)
     else: 
         enc = LabelEncoder()
-        
-        df['Location']= enc.fit_transform(df['Location'])
-        df['Name']= enc.fit_transform(df['Name'])
-        df['Nation']= enc.fit_transform(df['Nation'])
-        df['Event']= enc.fit_transform(df['Event'])
-        df['Competition_flag']= enc.fit_transform(df['Competition_flag'])
-        
+        for col in categorical_cols:
+            df[col]= enc.fit_transform(df[col])
         return df
 
 
@@ -195,7 +188,7 @@ output_comparison(model3, model4)
 
 
 #%% Mulitcollinearity Investigation
-X = df.select_dtypes(include='number').iloc[:,1:] # !!! Select numerical columns instead
+X = df.select_dtypes(include='number').iloc[:,1:] 
 
 # Calculate the varaince inflation factors
 vif = pd.Series([variance_inflation_factor(X.values, i) for i in range(X.shape[1])],
