@@ -1,5 +1,9 @@
 # Swimming-Predictions
-To what extent can competitive swimming results be predicted? I aim to use various machine learning techniques to predict the 2020 Olympic swimming results given data on historical swims. I'm doing this for a bit of fun, plus I haven't seen a tool online that does data-driven predictions. Growing up as a competitive swimmer I had already spent hours and hours trawling through swimming data, so I knew the data for swimming results are out there. Now I'm building on my data science toolkit, I just had to give it a go. 
+To what extent can competitive swimming results be predicted? I aim to use various machine learning techniques to predict the 2020 Olympic swimming results given data on historical swims. 
+
+What is the point in all this? Swimming is regarded, by swim fans, as a relatively forseeable sport. There are athletes that we know will take Gold at the next World Championships or Olympics, for example Caeleb Dressel winning the 100 Free and Adam Peaty storming the 100 Breaststroke. At the elite level, the variance of swimmer's all-out times are in the realm of milliseconds. Though when it comes to the races with more of a level playing field, the forecasts from swim analysts are generally reduced to hunches. The magazine SwimSwam lead the number crunching game, and their knowledge of the state of every swimmer's training, which drives their analysis, is impressive. However, I have not seen an online tool that performs data-driven predictions. There are a behemouth of factors that determine the athlete fitness and competition readiness, so I expect this project will be feature-engineering heavy.
+
+I'm doing this for a bit of fun. Growing up as a competitive swimmer, I spent hours and hours trawling through swimming data, so I knew the data for swimming results are out there. Now I'm building on my data science toolkit, I just had to give it a go. 
 
 ## Data Source
 The data was obtained from swimrankings (https://www.swimrankings.net/index.php?page=home) which holds a database containing (most) results from elite-level competitions all over the world. Their data is based on information from the European Swimming Federation (LEN) rankings database and the results and ranking database of national swimming federations. 
@@ -27,8 +31,6 @@ First tried out a linear model with time as the dependent variable and all predi
 - The predictors used in the regression are not correlated with each other.
 - No Autocorrelations in the residuals
 - Error terms are homoscedastic
-
-#### SVM
 
 #### Random Forest
 
