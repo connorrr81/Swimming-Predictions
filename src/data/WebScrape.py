@@ -16,8 +16,9 @@ import time
 import ssl
 
 ssl._create_default_https_context = ssl._create_unverified_context
-path = os.path.dirname(os.path.realpath(__file__))
-OUTPUTPATH = path + "\\times.csv"
+
+path = os.path.abspath(os.path.join(__file__ ,"../../.."))
+OUTPUTPATH = path + "\\data\\raw\\times.csv"
 
 #%% Initialise BeautifulSoup on Olympic Events Page
 
@@ -63,11 +64,9 @@ for link in links[-1:]:
             continue
         event_ID = event_df['ID'][events]
         event_history_page = address + "&styleId=" + str(event_ID)
-        print(event_history_page)
         
         historic_tables = pd.read_html(event_history_page)
         historic_df = historic_tables[3]
-        print(historic_df.head())
         
 #%% Get links to athlete profile for all olympic finals
 
@@ -125,7 +124,7 @@ for event in event_df["ID"]:
         
         time.sleep(5)
 
-#times_df.to_csv(OUTPUTPATH) 
+times_df.to_csv(OUTPUTPATH) 
     
 #%%
 def get_swimmer_info(url):
